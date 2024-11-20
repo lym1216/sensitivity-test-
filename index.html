@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>향기 민감도 테스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .box {
+            background-color: #fff;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .sensitivity-level {
+            margin-top: 10px;
+            font-size: 1.5em;
+            color: #e64a19;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>향기 민감도 테스트</h1>
+    <p>당신의 향기 민감도를 테스트해보세요!</p>
+    
+    <div class="box">
+        <h2>당신의 민감성</h2>
+        
+        <label for="lemon">레몬 향기 수치 (0.1 ~ 1.5):</label>
+        <input type="number" id="lemon" min="0.1" max="1.5" step="0.1">
+        
+        <label for="flower">꽃 향기 수치 (0.1 ~ 1.5):</label>
+        <input type="number" id="flower" min="0.1" max="1.5" step="0.1">
+        
+        <label for="vanilla">바닐라 향기 수치 (0.1 ~ 1.5):</label>
+        <input type="number" id="vanilla" min="0.1" max="1.5" step="0.1">
+        
+        <button onclick="showResults()">결과 확인</button>
+        
+        <div id="result" class="sensitivity-level"></div>
+    </div>
+
+    <script>
+        function getSensitivity(value) {
+            if (value >= 0.1 && value <= 0.5) {
+                return "낮음";
+            } else if (value >= 0.6 && value <= 1.0) {
+                return "보통";
+            } else if (value >= 1.1 && value <= 1.5) {
+                return "높음";
+            } else {
+                return "잘못된 수치";
+            }
+        }
+
+        function showResults() {
+            // 수치 가져오기
+            var lemon = parseFloat(document.getElementById("lemon").value);
+            var flower = parseFloat(document.getElementById("flower").value);
+            var vanilla = parseFloat(document.getElementById("vanilla").value);
+
+            // 민감도 계산
+            var resultText = `
+                <h3>당신의 민감성:</h3>
+                레몬 향기: ${getSensitivity(lemon)}<br>
+                꽃 향기: ${getSensitivity(flower)}<br>
+                바닐라 향기: ${getSensitivity(vanilla)}
+            `;
+            
+            // 결과 텍스트를 화면에 출력
+            document.getElementById("result").innerHTML = resultText;
+        }
+    </script>
+</body>
+</html>
